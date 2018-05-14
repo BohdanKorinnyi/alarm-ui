@@ -10,20 +10,28 @@ import * as moment from 'moment';
   styleUrls: ['./calls.component.css']
 })
 export class CallsComponent implements OnInit {
+  DATE_PATTERN = 'DD/MM/YYYY HH:mm';
 
   constructor(private callService: CallService) {
   }
 
-  DATE_PATTERN = 'DD/MM/YYYY HH:mm';
   calls: Call[];
-
   currentPage: number;
-  pages: number[];
+  page: Pageable<Call>;
+  first: true;
+  last: true;
 
   ngOnInit() {
     this.callService.getCalls().subscribe((page: Pageable<Call>) => {
       this.calls = page.content;
-      this.pages = Array(page.totalPages).fill(0);
+      this.page = page;
+    });
+  }
+
+  loadPage(page: number) {
+    this.currentPage = page;
+    this.callService.getCallsByPage(page).subscribe((newPage: Pageable<Call>) => {
+      this.calls = newPage.content;
     });
   }
 
@@ -37,13 +45,6 @@ export class CallsComponent implements OnInit {
 
   formatCost(cost: number) {
     return cost != null ? cost * -1 : 0;
-  }
-
-  loadPage(page: number) {
-    this.currentPage = page;
-    this.callService.getCallsByPage(page).subscribe((newPage: Pageable<Call>) => {
-      this.calls = newPage.content;
-    });
   }
 
   formatLanguage(alarm: Alarm) {
