@@ -13,11 +13,14 @@ import {ListComponent} from './main-panel/clients/list/list.component';
 import {StatsComponent} from './main-panel/clients/stats/stats.component';
 import {RouterModule, Routes} from '@angular/router';
 import {CallsComponent} from './calls/calls.component';
+import {FormsModule} from '@angular/forms';
+import {CountryStatsComponent} from './country-stats/country-stats.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'client', pathMatch: 'full'},
-  {path: 'client', component: MainPanelComponent},
-  {path: 'call', component: CallsComponent},
+  {path: '', redirectTo: 'clients', pathMatch: 'full'},
+  {path: 'clients', component: MainPanelComponent},
+  {path: 'calls', component: CallsComponent},
+  {path: 'statistic', component: CountryStatsComponent},
   {path: '**', component: MainPanelComponent}
 ];
 
@@ -28,12 +31,14 @@ const routes: Routes = [
     MainPanelComponent,
     StatsComponent,
     ListComponent,
-    CallsComponent
+    CallsComponent,
+    CountryStatsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes, {useHash: false})
   ],
   providers: [ClientService, CallService],

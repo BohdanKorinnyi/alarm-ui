@@ -16,16 +16,22 @@
 
   <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y">
     <ul class="nav">
-      <li [ngClass]="{'active': clientClicked}" (click)="callClicked = false; clientClicked=true;">
+      <li [ngClass]="{'active': clientClicked}" (click)="callClicked = false; clientClicked=true;statsClicked=false;">
         <a>
           <i class="now-ui-icons emoticons_satisfied"></i>
-          <p style="font-size: 14px" routerLink="/client" routerLinkActive="active">Clients</p>
+          <p style="font-size: 14px" routerLink="/clients" routerLinkActive="active">Clients</p>
         </a>
       </li>
-      <li [ngClass]="{'active': callClicked}" (click)="callClicked = true; clientClicked=false;">
+      <li [ngClass]="{'active': callClicked}" (click)="callClicked = true; clientClicked=false;statsClicked=false;">
         <a>
           <i class="now-ui-icons tech_headphones"></i>
-          <p style="font-size: 14px" routerLink="/call" routerLinkActive="active">Calls</p>
+          <p style="font-size: 14px" routerLink="/calls" routerLinkActive="active">Calls</p>
+        </a>
+      </li>
+      <li [ngClass]="{'active': statsClicked}" (click)="statsClicked=true;clientClicked=false;callClicked = false;">
+        <a>
+          <i class="now-ui-icons business_chart-bar-32"></i>
+          <p style="font-size: 14px" routerLink="/statistic" routerLinkActive="active">Statistics</p>
         </a>
       </li>
     </ul>

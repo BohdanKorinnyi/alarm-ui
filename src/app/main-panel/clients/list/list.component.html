@@ -2,7 +2,18 @@
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header ">
+        <nav class="pagination-buttons">
+          <ul class="pagination justify-content-end">
+            <li class="page-item" [ngClass]="{'disabled': first}">
+              <a class="page-link" tabindex="-1" (click)="loadPage(currentPage - 1)">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': last}">
+              <a class="page-link" tabindex="-1" (click)="loadPage(currentPage + 1)">Next</a>
+            </li>
+          </ul>
+        </nav>
         <h4 class="card-title">Clients</h4>
+        <h4 class="category">Page {{currentPage + 1}} of {{totalPages}}</h4>
       </div>
       <div class="card-body ">
         <table class="table">
@@ -10,39 +21,22 @@
           <tr>
             <td>#</td>
             <td>Name</td>
-            <!--<td>Proof</td>-->
             <td>Registered</td>
-            <td>Updated</td>
-            <td>Internal Id</td>
-            <td>External Id</td>
+            <td>Internal ID</td>
+            <td>External ID</td>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let client of clients; let i = index">
-            <td>{{i + 1}}</td>
+            <td>{{(i + 1) + (currentPage * size)}}</td>
             <td>{{client.firstName}} {{client.lastName}}</td>
-            <!--<td>{{client.proof ? 'Yes' : 'No'}}</td>-->
             <td>{{formatDate(client.registered)}}</td>
-            <td>{{formatDate(client.updated)}}</td>
             <td>{{client.id}}</td>
             <td>{{client.externalId}}</td>
           </tr>
           </tbody>
         </table>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </div>

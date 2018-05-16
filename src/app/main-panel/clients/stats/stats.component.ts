@@ -3,8 +3,7 @@ import {Client} from '../../../model/client';
 import {Pageable} from '../../../model/pageable';
 import {ClientService} from '../../../service/client.service';
 import {CallService} from '../../../service/call.service';
-import {CallStatus} from '../../../model/call';
-import {Stats} from '../../../model/stats';
+import {CallStats} from '../../../model/stats';
 
 @Component({
   selector: 'app-stats',
@@ -20,12 +19,10 @@ export class StatsComponent implements OnInit {
   cost = 0;
 
   ngOnInit() {
-    this.callService.getCallStatisticsByStatus(CallStatus.COMPLETED).subscribe((stats: Stats) => {
-      this.completedCalls = stats.amount;
-      this.cost = stats.cost;
-    });
-    this.clientService.getClients().subscribe((page: Pageable<Client>) => {
-      this.clients = page.totalElements;
+    this.clientService.getClients(0).subscribe((page: Pageable<Client>) => this.clients = page.totalElements);
+    this.callService.getGeneralCallStatistics().subscribe((stats: CallStats) => {
+      this.completedCalls = stats.count;
+      this.cost = stats.sum;
     });
   }
 }

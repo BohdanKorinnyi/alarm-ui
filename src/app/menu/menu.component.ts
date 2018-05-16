@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   clientClicked = true;
+  statsClicked = false;
   callClicked = false;
 
   constructor(router: Router) {
@@ -15,9 +16,15 @@ export class MenuComponent implements OnInit {
       if (url.url !== undefined && url.url === '/clients') {
         this.clientClicked = true;
         this.callClicked = false;
+        this.statsClicked = false;
       } else if (url.url !== undefined && url.url === '/calls') {
         this.clientClicked = false;
+        this.statsClicked = false;
         this.callClicked = true;
+      } else if (url.url !== undefined && url.url === '/statistic') {
+        this.clientClicked = false;
+        this.callClicked = false;
+        this.statsClicked = true;
       }
     });
   }

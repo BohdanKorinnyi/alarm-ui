@@ -1,26 +1,22 @@
 export class Call {
   id: number;
-  parentId: number;
-  cost: number;
-  creation: string;
-  updated: string;
-  duration: number;
-  fullyListened: boolean;
-  callNumber: CallNumber;
-  alarm: Alarm;
-  callStatus: Status;
-}
-
-export class Status {
-  id: number;
-  name: string;
-}
-
-export class CallNumber {
-  id: number;
+  /*call id*/
   number: string;
+  /*number*/
+  value: string;
+  /*status*/
+  name: string;
+  /*language*/
+  duration: number;
+  /*call duration*/
+  cost: number;
+  /*call cost*/
+  parentId: number;
+  /*parent call id*/
   creation: string;
-  active: boolean;
+  /*date of call creation*/
+  updated: string;
+  /*date of the last call update*/
 }
 
 export class Alarm {

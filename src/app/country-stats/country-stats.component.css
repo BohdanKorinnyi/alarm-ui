@@ -6,9 +6,3 @@
 .table > tbody > tr > td {
   text-align: center !important;
 }
-
-.pagination-buttons {
-  position: absolute;
-  right: 0;
-  top: 35px;
-}

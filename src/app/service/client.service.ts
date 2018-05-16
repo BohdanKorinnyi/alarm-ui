@@ -6,7 +6,7 @@ export class ClientService {
   constructor(private http: HttpClient) {
   }
 
-  getClients() {
-    return this.http.get('/api/clients');
+  getClients(page: number) {
+    return this.http.get('/api/clients?page=' + page);
   }
 }

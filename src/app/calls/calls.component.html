@@ -19,55 +19,54 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header ">
+          <div class="card-header">
+            <nav class="pagination-buttons">
+              <ul class="pagination justify-content-end">
+                <li class="page-item" [ngClass]="{'disabled': first}">
+                  <a class="page-link" tabindex="-1" (click)="loadPage(currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" [ngClass]="{'disabled': last}">
+                  <a class="page-link" tabindex="-1" (click)="loadPage(currentPage + 1)">Next</a>
+                </li>
+              </ul>
+            </nav>
             <h4 class="card-title">Calls</h4>
+            <h4 class="category">Page {{currentPage + 1}} of {{totalPages}}</h4>
           </div>
           <div class="card-body ">
             <table class="table">
               <thead>
               <tr>
                 <td>#</td>
-                <td>Number</td>
+                <td>
+                  <input type="text" class="form-control form-control-sm" placeholder="Search by phone number"
+                         [(ngModel)]="searchPhoneNumber" (ngModelChange)="searchCallByNumber()"/>
+                </td>
                 <td>Created</td>
-                <td>Completed</td>
+                <td>Ended</td>
                 <td>Status</td>
                 <td>Duration</td>
                 <td>Cost</td>
                 <td>Language</td>
-                <td>Alarm Id</td>
-                <td>Alarm Parent Id</td>
+                <td>Call ID</td>
+                <td>Parent Call ID</td>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let call of calls; let i = index">
-                <td>{{i + 1}}</td>
-                <td>{{call.callNumber.number}}</td>
+                <td>{{(i + 1) + (currentPage * size)}}</td>
+                <td>{{call.number}}</td>
                 <td>{{formatDate(call.creation)}}</td>
                 <td>{{formatDate(call.updated)}}</td>
-                <td>{{call.callStatus.name}}</td>
+                <td>{{call.value}}</td>
                 <td>{{formatDuration(call.duration)}} s</td>
                 <td>{{formatCost(call.cost)}} $</td>
-                <td>{{formatLanguage(call.alarm)}}</td>
+                <td>{{call.name}}</td>
                 <td>{{call.id}}</td>
                 <td>{{call.parentId}}</td>
               </tr>
               </tbody>
             </table>
-            <nav>
-              <ul class="pagination justify-content-center">
-                <li class="page-item" [ngClass]="{'page-item disabled': first}">
-                  <a class="page-link" tabindex="-1" (click)="loadPage(currentPage - 1)">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">99</a></li>
-                <li class="page-item" [ngClass]="{'disabled': last}">
-                  <a class="page-link" (click)="loadPage()">Next</a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </div>

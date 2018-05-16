@@ -8,15 +8,19 @@ export class CallService {
   constructor(private http: HttpClient) {
   }
 
-  getCalls() {
-    return this.http.get('/api/calls');
-  }
-
   getCallsByPage(page: number) {
     return this.http.get('/api/calls?page=' + page);
   }
 
-  getCallStatisticsByStatus(status: CallStatus) {
-    return this.http.get('/api/calls/statistics?id=' + status.valueOf());
+  getCallsByPhoneNumber(number: string, page: number) {
+    return this.http.get('/api/calls/numbers?page=' + page + '&number=' + number);
+  }
+
+  getGeneralCallStatistics() {
+    return this.http.get('/api/stats/general');
+  }
+
+  getCountryCallStatistics() {
+    return this.http.get('/api/stats/countries');
   }
 }
